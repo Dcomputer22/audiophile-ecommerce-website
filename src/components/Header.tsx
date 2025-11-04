@@ -1,0 +1,97 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+
+const Header = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const navItems = [
+    { name: 'HOME', link: '/' },
+    { name: 'HEADPHONES', link: '/headphones' },
+    { name: 'SPEAKERS', link: '/speakers' },
+    { name: 'EARPHONES', link: '/earphones' },
+  ];
+  return (
+    <header className="bg-black/90 text-white ">
+      <section className="flex items-center justify-between border-b-2 border-white/10 mx-10 py-6">
+        <button
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          className="text-white lg:hidden"
+        >
+          {mobileMenuOpen ? (
+            <Image
+              src="/assets/close.svg"
+              width={16}
+              height={16}
+              alt="close menu"
+            />
+          ) : (
+            <Image
+              src="/assets/hamburger.svg"
+              width={16}
+              height={16}
+              alt="open menu"
+            />
+          )}
+        </button>
+
+        <Link href="/">
+          <Image
+            className="w-full h-full"
+            src="/assets/logo.svg"
+            width={50}
+            height={50}
+            alt="logo"
+          />
+        </Link>
+
+        <nav className="hidden md:hidden lg:block flex-1 mx-8">
+          <ul className="flex items-center justify-center gap-12">
+            {navItems.map((item) => (
+              <li key={item.name}>
+                <Link
+                  href={item.link}
+                  className="lg:text-white hover:text-[#D87D4A] text-xl"
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <Link href="/" className="cursor-pointer">
+          <Image
+            src="/assets/carts.svg"
+            width={25}
+            height={25}
+            alt="shopping cart"
+          />
+        </Link>
+      </section>
+
+      {mobileMenuOpen && (
+        <section className="bg-black border-t border-gray-800 lg:hidden">
+          <nav className="py-8">
+            <ul className="flex flex-col gap-4">
+              {navItems.map((item) => (
+                <li key={item.name} className="text-center">
+                  <Link
+                    href={item.link}
+                    className="text-white hover:text-[#D87D4A]"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </section>
+      )}
+    </header>
+  );
+};
+
+export default Header;
