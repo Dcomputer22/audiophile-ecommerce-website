@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const HomePage = () => {
   return (
-    <section className="m-auto">
+    <section className="">
       {/* Hero section */}
       <section
         className="min-h-screen mx-auto bg-cover pl-5 bg-center bg-no-repeat bg-black rounded-b-lg lg:px-12 px-6"
@@ -30,7 +30,7 @@ const HomePage = () => {
       </section>
 
       {/* Categories section */}
-      <section className="container mt-20 lg:px-12 px-6">
+      <section className="mt-20 lg:px-12 px-6">
         <section className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-16 md-gap-10 lg:gap-8 ">
           <section className="relative bg-[#F1F1F1] rounded-lg pt-20 pb-6 flex flex-col items-center text-center cursor-pointer">
             <section className="absolute -top-12 w-40 h-40">
@@ -103,7 +103,7 @@ const HomePage = () => {
         </section>
       </section>
 
-      <section className="container mb-12 md:mb-8 lg:mb-12 py-20 lg:px-12 px-6">
+      <section className="mb-12 md:mb-8 lg:mb-12 py-20 lg:px-12 px-6">
         <section className="bg-[#D87D4A] rounded-lg overflow-hidden relative px-6 md:px-16 py-14 md:py-16 lg:py-24 flex flex-col lg:flex-row items-center lg:items-end gap-8 lg:gap-0">
           <section className="absolute top-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 w-[558px] h-[558px] lg:w-[944px] lg:h-[944px] opacity-30">
             <svg width="100%" height="100%" viewBox="0 0 944 944">
@@ -150,7 +150,7 @@ const HomePage = () => {
         </section>
       </section>
 
-      <section className="container mb-12 md:mb-8 lg:mb-12 py-20 lg:px-12 px-6">
+      <section className="mb-12 md:mb-8 lg:mb-12 py-20 lg:px-12 px-6">
         <section
           className="rounded-lg overflow-hidden relative px-6 md:px-16 lg:px-24 py-24 md:py-28 bg-cover bg-center"
           style={{
@@ -169,7 +169,7 @@ const HomePage = () => {
         </section>
       </section>
 
-      <section className="container-custom mb-32 md:mb-24 lg:px-12 px-6">
+      <section className="mb-32 md:mb-24 lg:px-12 px-6">
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-3 lg:gap-8">
           <section className="rounded-lg overflow-hidden bg-light-gray h-[200px] md:h-[320px]">
             <img
@@ -190,7 +190,7 @@ const HomePage = () => {
         </section>
       </section>
 
-      <section className="container mb-32 md:mb-24 lg:px-12 px-6">
+      <section className="mb-32 md:mb-24 lg:px-12 px-6">
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-32 items-center">
           <section className="order-1 lg:order-2 rounded-lg overflow-hidden">
             <img
