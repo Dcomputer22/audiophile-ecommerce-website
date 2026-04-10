@@ -124,10 +124,12 @@ const HomePage = () => {
           </section>
 
           <section className="relative z-10 w-full lg:w-1/2 flex justify-center lg:justify-start lg:pl-24">
-            <img
+            <Image
               src="/assets/home/desktop/image-speaker-zx9.png"
               alt="ZX9 Speaker"
               className="w-[172px] md:w-[197px] lg:w-[410px] h-auto"
+              width={160}
+              height={410}
             />
           </section>
 
@@ -172,10 +174,12 @@ const HomePage = () => {
       <section className="mb-32 md:mb-24 lg:px-12 px-6">
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-3 lg:gap-8">
           <section className="rounded-lg overflow-hidden bg-light-gray h-[200px] md:h-[320px]">
-            <img
+            <Image
               src="/assets/home/desktop/image-earphones-yx1.jpg"
               alt="YX1 Earphones"
               className="w-full h-full object-cover"
+              width={410}
+              height={410}
             />
           </section>
 
@@ -193,10 +197,12 @@ const HomePage = () => {
       <section className="mb-32 md:mb-24 lg:px-12 px-6">
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-32 items-center">
           <section className="order-1 lg:order-2 rounded-lg overflow-hidden">
-            <img
+            <Image
               src="/assets/man.png"
               alt="Person wearing headphones"
               className="w-full h-full object-cover rounded-lg"
+              width={410}
+              height={410}
             />
           </section>
 

@@ -79,7 +79,7 @@ const Header = () => {
                 <li key={item.name} className="text-center">
                   <Link
                     href={item.link}
-                    className="text-white hover:text-[#D87D4A]"
+                    className="text-white hover:text-[#D87D4A] active:text-[#D87D4A]"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
