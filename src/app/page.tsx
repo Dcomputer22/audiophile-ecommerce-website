@@ -8,7 +8,7 @@ const HomePage = () => {
       <section
         className="min-h-screen mx-auto bg-cover pl-5 bg-center bg-no-repeat bg-black rounded-b-lg lg:px-12 px-6"
         style={{
-          backgroundImage: "url('/assets/home/desktop/image-hero.jpg')",
+          backgroundImage: "url(`/assets/home/desktop/image-hero.jpg')",
         }}
       >
         <section className="min-h-screen flex flex-col items-start justify-center font-sans text-white ml-10 gap-4">

@@ -3,29 +3,28 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { CgClose } from 'react-icons/cg';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+
   const navItems = [
     { name: 'HOME', link: '/' },
-    { name: 'HEADPHONES', link: '/headphones' },
-    { name: 'SPEAKERS', link: '/speakers' },
-    { name: 'EARPHONES', link: '/earphones' },
+    { name: 'HEADPHONES', link: '/products/headphones' },
+    { name: 'SPEAKERS', link: '/products/speakers' },
+    { name: 'EARPHONES', link: '/products/earphones' },
   ];
+
   return (
-    <header className="bg-black/90 text-white ">
+    <header className="bg-black/90 text-white">
       <section className="flex items-center justify-between border-b-2 border-white/10 mx-10 py-6">
         <button
           onClick={() => setMobileMenuOpen((prev) => !prev)}
           className="text-white lg:hidden"
+          aria-label="Toggle menu"
         >
           {mobileMenuOpen ? (
-            <Image
-              src="/assets/close.svg"
-              width={16}
-              height={16}
-              alt="close menu"
-            />
+            <CgClose width={16} height={16} />
           ) : (
             <Image
               src="/assets/hamburger.svg"
@@ -52,7 +51,7 @@ const Header = () => {
               <li key={item.name}>
                 <Link
                   href={item.link}
-                  className="lg:text-white hover:text-[#D87D4A] text-xl"
+                  className="lg:text-white hover:text-[#D87D4A] text-xl transition-colors duration-200"
                 >
                   {item.name}
                 </Link>
@@ -61,7 +60,11 @@ const Header = () => {
           </ul>
         </nav>
 
-        <Link href="/" className="cursor-pointer">
+        <Link
+          href="/checkout"
+          className="cursor-pointer"
+          aria-label="Shopping cart"
+        >
           <Image
             src="/assets/carts.svg"
             width={25}
@@ -79,7 +82,7 @@ const Header = () => {
                 <li key={item.name} className="text-center">
                   <Link
                     href={item.link}
-                    className="text-white hover:text-[#D87D4A] active:text-[#D87D4A]"
+                    className="text-white hover:text-[#D87D4A] active:text-[#D87D4A] transition-colors duration-200"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
