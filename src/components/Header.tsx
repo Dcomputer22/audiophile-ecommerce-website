@@ -51,7 +51,7 @@ const Header = () => {
               <li key={item.name}>
                 <Link
                   href={item.link}
-                  className="lg:text-white hover:text-[#D87D4A] text-xl transition-colors duration-200"
+                  className="lg:text-white hover:text-[#D87D4A] text-[13px] font-bold tracking-[2px] transition-colors duration-200"
                 >
                   {item.name}
                 </Link>
@@ -69,6 +69,7 @@ const Header = () => {
             src="/assets/carts.svg"
             width={25}
             height={25}
+            className="w-full h-full"
             alt="shopping cart"
           />
         </Link>
