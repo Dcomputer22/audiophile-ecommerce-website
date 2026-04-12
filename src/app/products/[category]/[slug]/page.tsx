@@ -1,5 +1,7 @@
 import { About } from '@/components/About';
+import { Cart } from '@/components/Cart';
 import { Category } from '@/components/Category';
+import { ProductInfo } from '@/components/ProductInfo';
 import productData from '@/products/db.json';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -59,43 +61,7 @@ const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
                 </picture>
               </div>
               {/* Product info */}
-              <div>
-                {product.new && (
-                  <p className='ont-normal text-sm tracking-[10px] uppercase text-[#D87D4A] mb-4 md:mb-6'>
-                    New Product
-                  </p>
-                )}
-                <h1 className='text-[28px] md:text-[40px] font-bold mb-6 md:mb-8 uppercase tracking-[1px] md:tracking-[1.5px] leading-tight'>
-                  {product.name}
-                </h1>
-                <p className='text-[15px] leading-[25px] text-black/50 mb-6 md:mb-8'>
-                  {product.description}
-                </p>
-                <p className='text-[18px] font-bold mb-8 tracking-[1.3px]'>
-                  {product.price.toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                  })}
-                </p>
-
-                <div className='flex gap-4'>
-                  <div className='flex items-center bg-[#F1F1F1]'>
-                    <button className='px-4 py-2 text-black/25 hover:text-[#D87D4A] font-bold transition-colors cursor-pointer'>
-                      -
-                    </button>
-                    <span className='px-6 py-4 font-bold text-[13px] tracking-[1px]'>
-                      1
-                    </span>
-                    <button className='px-5 py-4 text-black/25 hover:text-[#D87D4A] font-bold transition-colors cursor-pointer'>
-                      +
-                    </button>
-                  </div>
-
-                  <button className='bg-[#D87D4A] text-white uppercase font-normal py-3 px-6 hover:bg-[#FBAF85] cursor-pointer'>
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
+              <ProductInfo product={product} />
             </div>
           </section>
 
