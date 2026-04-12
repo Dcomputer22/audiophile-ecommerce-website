@@ -65,7 +65,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
                 className={`flex flex-col justify-center items-center lg:items-start gap-3.5 ${index % 2 === 1 ? 'lg:order-1' : 'lg:order-2'}`}
               >
                 {product.new && (
-                  <p className="font-normal text-sm tracking-[10px] uppercase text-[#D87D4A] mb-4 md:mb-6">
+                  <p className="font-normal text-sm tracking-[10px] uppercase text-[#D87D4A]">
                     NEW PRODUCT
                   </p>
                 )}
