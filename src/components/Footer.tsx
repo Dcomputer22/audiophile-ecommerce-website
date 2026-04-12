@@ -37,7 +37,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="/headphones"
+                    href="/products/headphones"
                     className="text-subtitle hover:text-[#D87D4A] transition-colors"
                   >
                     HEADPHONES
@@ -45,7 +45,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="/speakers"
+                    href="/products/speakers"
                     className="text-subtitle hover:text-[#D87D4A] transition-colors"
                   >
                     SPEAKERS
@@ -53,7 +53,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="/earphones"
+                    href="/products/earphones"
                     className="text-subtitle hover:text-[#D87D4A] transition-colors"
                   >
                     EARPHONES
