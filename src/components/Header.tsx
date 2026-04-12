@@ -31,6 +31,7 @@ const Header = () => {
               width={16}
               height={16}
               alt="open menu"
+              className="w-full h-full"
             />
           )}
         </button>
