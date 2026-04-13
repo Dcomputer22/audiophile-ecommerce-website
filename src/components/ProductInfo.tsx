@@ -1,12 +1,19 @@
 'use client';
 import { useState } from "react";
-import { Cart } from "./Cart";
-
+import { useCart } from "@/context/CartContext";
 interface Product {
+  id: number;
+  slug: string;
+  category: string;
   new: boolean;
   name: string;
   description: string;
   price: number;
+  image: {
+    mobile: string;
+    tablet: string;
+    desktop: string;
+  };
 }
 
 interface ProductInfoProps {
@@ -14,17 +21,32 @@ interface ProductInfoProps {
 }
 
 export const ProductInfo = ({ product }: ProductInfoProps) => {
-  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
-  const [quantity, setQuantity] = useState<number>(1);  
-
+  const [quantity, setQuantity] = useState<number>(1);
+  const {addItem}  = useCart();
+  
   const handleIncrement = () => setQuantity((prev) => prev + 1);
   const handleDecrement = () => setQuantity((prev) => Math.max(1, prev - 1));
+  
+  const handleAddToCart = () => {
+    addItem(
+      {
+      id: product.id.toString(),
+      slug: product.slug,
+      name: product.name,
+      price: product.price,
+      image: product.image.mobile.replace('./', '/'),
+      category: product.category,
+    },
+    quantity
+  );
+  setQuantity(1);
+  }
 
   return (
     <div>
       {product.new && (
         <p className='relative font-normal text-sm tracking-[10px] uppercase text-[#D87D4A] mb-4 md:mb-6'>
-          New Product
+          NEW PRODUCT
         </p>
       )}
       <h1 className='text-[28px] md:text-[40px] font-bold mb-6 md:mb-8 uppercase tracking-[1px] md:tracking-[1.5px] leading-tight'>
@@ -34,10 +56,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
         {product.description}
       </p>
       <p className='text-[18px] font-bold mb-8 tracking-[1.3px]'>
-        {product.price.toLocaleString('en-US', {
-          style: 'currency',
-          currency: 'USD',
-        })}
+        ${product.price.toLocaleString()}
       </p>
 
       <div className='flex gap-4'>
@@ -53,13 +72,10 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
           </button>
         </div>
 
-        <button onClick={() => setIsCartOpen(true)} className='bg-[#D87D4A] text-white uppercase font-normal py-3 px-6 hover:bg-[#FBAF85] cursor-pointer'>
+        <button onClick={handleAddToCart} className='bg-[#D87D4A] text-white uppercase font-normal py-3 px-6 hover:bg-[#FBAF85] cursor-pointer'>
           Add to Cart
         </button>
       </div>
-      {isCartOpen && (
-        <Cart />
-      )}
     </div>
   )
 }

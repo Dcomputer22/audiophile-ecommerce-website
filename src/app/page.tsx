@@ -18,7 +18,7 @@ const HomePage = () => {
             <p className="text-[14px] tracking-[10px] uppercase text-white/50 mb-4">
               NEW PRODUCT
             </p>
-            <h1 className="text-[36px] lg:text-[56px] leading-[40px] lg:leading-[58px] font-bold tracking-[1.3px] lg:tracking-[2px] mb-6 uppercase">
+            <h1 className="text-[36px] lg:text-[56px] leading-10 lg:leading-[58px] font-bold tracking-[1.3px] lg:tracking-[2px] mb-6 uppercase">
               XX99 MARK II
               <br />
               HEADPHONES
@@ -72,7 +72,7 @@ const HomePage = () => {
 
           {/* Content */}
           <div className="relative z-10 w-full lg:w-1/2 text-center lg:text-left lg:pr-10 pb-12">
-            <h2 className="text-[36px] md:text-[56px] leading-[40px] md:leading-[58px] font-bold text-white mb-6 uppercase tracking-[2px]">
+            <h2 className="text-[36px] md:text-[56px] leading-10 md:leading-[58px] font-bold text-white mb-6 uppercase tracking-[2px]">
               ZX9
               <br />
               SPEAKER
@@ -116,7 +116,7 @@ const HomePage = () => {
       <section className="max-w-[1110px] mx-auto px-6 mb-32">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-3 lg:gap-8">
           {/* Image */}
-          <div className="rounded-lg overflow-hidden bg-[#F1F1F1] h-[200px] md:h-[320px]">
+          <div className="rounded-lg overflow-hidden bg-[#F1F1F1] h-[200px] md:h-80">
             <Image
               src="/assets/home/desktop/image-earphones-yx1.jpg"
               alt="YX1 Earphones"

@@ -2,11 +2,13 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { CgClose } from 'react-icons/cg';
+import { useCart } from '@/context/CartContext';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const {toggleCart, totalItems} = useCart();
 
   const navItems = [
     { name: 'HOME', link: '/' },
@@ -61,9 +63,9 @@ const Header = () => {
           </ul>
         </nav>
 
-        <Link
-          href="/checkout"
-          className="cursor-pointer"
+        <button
+          onClick={toggleCart}
+          className="relative cursor-pointer"
           aria-label="Shopping cart"
         >
           <Image
@@ -73,7 +75,12 @@ const Header = () => {
             className="w-full h-full"
             alt="shopping cart"
           />
-        </Link>
+          {totalItems > 0 && (
+            <span className='absolute -top-2 -right-2 bg-[#D87D4A] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold'>
+              {totalItems}
+            </span>
+          )}
+        </button>
       </section>
 
       {mobileMenuOpen && (

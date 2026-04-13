@@ -1,5 +1,4 @@
 import { About } from '@/components/About';
-import { Cart } from '@/components/Cart';
 import { Category } from '@/components/Category';
 import { ProductInfo } from '@/components/ProductInfo';
 import productData from '@/products/db.json';
@@ -30,10 +29,10 @@ const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
 
   return (
     <>
-      <section className='max-w-[1110px] mx-auto px-6 py-8'>
+      <section className='max-w-[1110px] mx-auto px-6 py-8 md:py-12'>
         <Link
           href={`/products/${category}`}
-          className='font-normal text-[15px] text-black/50 hover:[#D87D4A] transition-colors'
+          className='font-normal text-[15px] text-black/50 hover:text-[#D87D4A] transition-colors'
         >
           Go Back
         </Link>
