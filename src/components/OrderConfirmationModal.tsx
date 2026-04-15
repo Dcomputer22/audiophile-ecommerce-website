@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -40,15 +41,7 @@ export const OrderConfirmationModal = ({
             <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
                 <div className="bg-white rounded-lg max-w-[540px] w-full p-8 md:p-12">
                     <div className="w-16 h-16 rounded-full bg-[#D87D4A] flex items-center justify-center mb-8">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M9 12L11 14L15 10"
-                                stroke="white"
-                                strokeWidth="3"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
+                        <Image src="/assets/checkout/icon-order-confirmation.svg" alt="checkmark" width={24} height={24} className='w-full h-full' />
                     </div>
 
                     <h1 className="text-[24px] md:text-[32px] font-bold mb-6 uppercase tracking-[1px]">
