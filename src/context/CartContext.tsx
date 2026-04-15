@@ -3,7 +3,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
-
 interface CartItem {
     id: string;
     slug: string;

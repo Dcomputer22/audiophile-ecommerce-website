@@ -4,7 +4,11 @@ import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { CheckoutFormData } from "../types/checkout";
+import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 import Link from "next/link";
+import Image from "next/image";
+import { toast } from "sonner";
 
 const CheckoutPage = () => {
   const { items, totalPrice, clearCart } = useCart();
@@ -24,6 +28,7 @@ const CheckoutPage = () => {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const createOrder = useMutation(api.order.createOrder);
 
   const shipping = 50;
   const vat = Math.round(totalPrice * 0.2);
@@ -69,9 +74,56 @@ const CheckoutPage = () => {
     setIsSubmitting(true);
 
     try {
-      // TODO: This is where you'll call Convex later
-      // For now, just simulate submission
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const result = await createOrder({
+        customer: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+        },
+        shipping: {
+          address: formData.address,
+          zipCode: formData.zipCode,
+          city: formData.city,
+          country: formData.country,
+        },
+        payment: {
+          method: formData.paymentMethod,
+          eMoneyNumber: formData.paymentMethod === 'e-money' ? formData.eMoneyNumber : undefined,
+          eMoneyPin: formData.paymentMethod === 'e-money' ? formData.eMoneyPin : undefined,
+        },
+        items: items,
+        totals: {
+          subtotal: totalPrice,
+          shipping,
+          vat,
+          grandTotal,
+        }
+      });
+
+      // Send confirmation email
+      await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderId: result.orderId,
+          orderNumber: result.orderNumber,
+          customer: formData,
+          items: items,
+          totals: {
+            subtotal: totalPrice,
+            shipping: shipping,
+            vat: vat,
+            grandTotal: grandTotal,
+          },
+        }),
+      });
+
+      //Store order data for confirmation page
+      sessionStorage.setItem('lastOrder', JSON.stringify({
+        orderNumber: result.orderNumber,
+        items: items,
+        grandTotal: grandTotal,
+      }));
 
       // Clear cart
       clearCart();
@@ -80,7 +132,7 @@ const CheckoutPage = () => {
       router.push('/confirmation');
     } catch (error) {
       console.error('Checkout error:', error);
-      alert('Something went wrong. Please try again.');
+      toast.error('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -367,12 +419,7 @@ const CheckoutPage = () => {
                     {formData.paymentMethod === 'cash' && (
                       <div className="flex items-start gap-8 mt-8">
                         <div className="w-12 h-12 shrink-0">
-                          <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                              d="M46.594 8.438H42.28c-.448 0-.869.213-1.134.574l-2.694 3.674a1.15 1.15 0 1 1-1.848-1.37c2.568-3.53 2.864-3.545 2.864-4.285 0-.779-.636-1.406-1.407-1.406h-5.404a17.658 17.658 0 0 1 9.606-2.813h4.33a1.406 1.406 0 0 0 0-2.812h-4.33c-5.277 0-10.33 2.02-14.142 5.625h-8.34c-.777 0-1.407.63-1.407 1.406v9.938H9.844c-.777 0-1.406.63-1.406 1.406v15.6a14.053 14.053 0 0 0-7.824 3.089 1.406 1.406 0 1 0 1.772 2.185 11.226 11.226 0 0 1 7.048-2.499h3.129c.775 0 1.406.63 1.406 1.406 0 .776-.631 1.407-1.406 1.407H9.844a1.406 1.406 0 0 0 0 2.812h2.719c.777 0 1.406.63 1.406 1.406 0 .776-.63 1.406-1.406 1.406H9.844a1.406 1.406 0 0 0 0 2.813h32.656a1.406 1.406 0 0 0 0-2.813H39.78c-.777 0-1.406-.63-1.406-1.406 0-.776.63-1.406 1.406-1.406h2.719a1.406 1.406 0 0 0 0-2.812H39.78c-.777 0-1.406-.631-1.406-1.407 0-.776.63-1.406 1.406-1.406h3.13a11.225 11.225 0 0 1 7.047 2.499 1.406 1.406 0 0 0 1.772-2.185 14.053 14.053 0 0 0-7.824-3.089v-15.6c0-.776-.63-1.406-1.407-1.406h-9.531V10.97c0-.776-.63-1.406-1.407-1.406h-6.344c1.596-1.013 3.434-1.738 5.406-2.084.652-.116 1.078-.721.962-1.375a1.407 1.407 0 0 0-1.375-.962 17.506 17.506 0 0 0-8.532 3.145H19.25c-.777 0-1.406.63-1.406 1.406v9.938H11.25v-15.6a1.406 1.406 0 0 0-1.406-1.407H1.406a1.406 1.406 0 0 0 0 2.813h7.032v15.6c0 .776.63 1.406 1.406 1.406h9.656c.777 0 1.406-.63 1.406-1.406V11.375h5.625c.777 0 1.406-.63 1.406-1.406 0-.776-.63-1.406-1.406-1.406h-5.625V7.032h8.906c.777 0 1.406-.63 1.406-1.406 0-.776-.63-1.406-1.406-1.406h-8.906c.777 0 1.406-.63 1.406-1.407 0-.776-.63-1.406-1.406-1.406h-5.625c.777 0 1.406-.631 1.406-1.407V0h21.656c.777 0 1.407-.63 1.407-1.406a1.406 1.406 0 0 0-1.407-1.407h-24.47c-.776 0-1.405.63-1.405 1.407V5.22c0 .777.629 1.406 1.406 1.406h5.625v1.407h-5.625c-.777 0-1.406.63-1.406 1.406v1.407h-5.625c-.777 0-1.406.63-1.406 1.406v18.75c0 .777.63 1.407 1.406 1.407h32.219c.777 0 1.406-.63 1.406-1.407v-18.75c0-.776-.63-1.406-1.406-1.406z"
-                              fill="#D87D4A"
-                            />
-                          </svg>
+                          <Image src={"/assets/checkout/icon-cash-on-delivery.svg"} alt="cash" width={48} height={48} className="w-full h-full"  />
                         </div>
                         <p className="text-[15px] text-black/50 leading-[25px]">
                           The 'Cash on Delivery' option enables you to pay in cash when our delivery
