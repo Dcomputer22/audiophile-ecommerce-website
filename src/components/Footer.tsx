@@ -65,7 +65,7 @@ const Footer = () => {
 
           <section className="flex flex-col md:flex-row justify-between items-center gap-12 md:gap-0 pt-12">
             <p className="text-[15px] text-white/50">
-              Copyright 2021. All Rights Reserved
+              Copyright {new Date().getFullYear()}. All Rights Reserved
             </p>
 
             <section className="flex gap-4">
