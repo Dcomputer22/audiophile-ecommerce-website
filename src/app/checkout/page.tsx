@@ -1,14 +1,14 @@
 'use client';
 
-import { useCart } from "@/context/CartContext";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { CheckoutFormData } from "../types/checkout";
-import { useMutation } from "convex/react";
-import { api } from "../../../convex/_generated/api";
-import Link from "next/link";
-import Image from "next/image";
-import { toast } from "sonner";
+import { useCart } from '@/context/CartContext';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { CheckoutFormData } from '../types/checkout';
+import { useMutation } from 'convex/react';
+import { api } from '../../../convex/_generated/api';
+import Link from 'next/link';
+import Image from 'next/image';
+import { toast } from 'sonner';
 
 const CheckoutPage = () => {
   const { items, totalPrice, clearCart } = useCart();
@@ -58,13 +58,15 @@ const CheckoutPage = () => {
     if (!formData.country.trim()) newErrors.country = 'Country is required';
 
     if (formData.paymentMethod === 'e-money') {
-      if (!formData.eMoneyNumber.trim()) newErrors.eMoneyNumber = 'e-Money Number is required';
-      if (!formData.eMoneyPin.trim()) newErrors.eMoneyPin = 'e-Money PIN is required';
+      if (!formData.eMoneyNumber.trim())
+        newErrors.eMoneyNumber = 'e-Money Number is required';
+      if (!formData.eMoneyPin.trim())
+        newErrors.eMoneyPin = 'e-Money PIN is required';
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,8 +90,14 @@ const CheckoutPage = () => {
         },
         payment: {
           method: formData.paymentMethod,
-          eMoneyNumber: formData.paymentMethod === 'e-money' ? formData.eMoneyNumber : undefined,
-          eMoneyPin: formData.paymentMethod === 'e-money' ? formData.eMoneyPin : undefined,
+          eMoneyNumber:
+            formData.paymentMethod === 'e-money'
+              ? formData.eMoneyNumber
+              : undefined,
+          eMoneyPin:
+            formData.paymentMethod === 'e-money'
+              ? formData.eMoneyPin
+              : undefined,
         },
         items: items,
         totals: {
@@ -97,7 +105,7 @@ const CheckoutPage = () => {
           shipping,
           vat,
           grandTotal,
-        }
+        },
       });
 
       // Send confirmation email
@@ -119,11 +127,14 @@ const CheckoutPage = () => {
       });
 
       //Store order data for confirmation page
-      sessionStorage.setItem('lastOrder', JSON.stringify({
-        orderNumber: result.orderNumber,
-        items: items,
-        grandTotal: grandTotal,
-      }));
+      sessionStorage.setItem(
+        'lastOrder',
+        JSON.stringify({
+          orderNumber: result.orderNumber,
+          items: items,
+          grandTotal: grandTotal,
+        }),
+      );
 
       // Clear cart
       clearCart();
@@ -190,8 +201,11 @@ const CheckoutPage = () => {
                           value={formData.name}
                           onChange={handleInputChange}
                           placeholder="Alexei Ward"
-                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${errors.name ? 'border-[#CD2C2C]' : 'border-[#CFCFCF]'
-                            }`}
+                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${
+                            errors.name
+                              ? 'border-[#CD2C2C]'
+                              : 'border-[#CFCFCF]'
+                          }`}
                         />
                         {errors.name && (
                           <p className="text-[#CD2C2C] text-[12px] font-medium mt-1">
@@ -217,8 +231,11 @@ const CheckoutPage = () => {
                           value={formData.email}
                           onChange={handleInputChange}
                           placeholder="alexei@mail.com"
-                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${errors.email ? 'border-[#CD2C2C]' : 'border-[#CFCFCF]'
-                            }`}
+                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${
+                            errors.email
+                              ? 'border-[#CD2C2C]'
+                              : 'border-[#CFCFCF]'
+                          }`}
                         />
                       </div>
 
@@ -232,8 +249,11 @@ const CheckoutPage = () => {
                           value={formData.phone}
                           onChange={handleInputChange}
                           placeholder="+1 202-555-0136"
-                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${errors.phone ? 'border-[#CD2C2C]' : 'border-[#CFCFCF]'
-                            }`}
+                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${
+                            errors.phone
+                              ? 'border-[#CD2C2C]'
+                              : 'border-[#CFCFCF]'
+                          }`}
                         />
                         {errors.phone && (
                           <p className="text-[#CD2C2C] text-[12px] font-medium mt-1">
@@ -260,8 +280,11 @@ const CheckoutPage = () => {
                           value={formData.address}
                           onChange={handleInputChange}
                           placeholder="1137 Williams Avenue"
-                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${errors.address ? 'border-[#CD2C2C]' : 'border-[#CFCFCF]'
-                            }`}
+                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${
+                            errors.address
+                              ? 'border-[#CD2C2C]'
+                              : 'border-[#CFCFCF]'
+                          }`}
                         />
                         {errors.address && (
                           <p className="text-[#CD2C2C] text-[12px] font-medium mt-1">
@@ -280,8 +303,11 @@ const CheckoutPage = () => {
                           value={formData.zipCode}
                           onChange={handleInputChange}
                           placeholder="10001"
-                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${errors.zipCode ? 'border-[#CD2C2C]' : 'border-[#CFCFCF]'
-                            }`}
+                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${
+                            errors.zipCode
+                              ? 'border-[#CD2C2C]'
+                              : 'border-[#CFCFCF]'
+                          }`}
                         />
                         {errors.zipCode && (
                           <p className="text-[#CD2C2C] text-[12px] font-medium mt-1">
@@ -300,8 +326,11 @@ const CheckoutPage = () => {
                           value={formData.city}
                           onChange={handleInputChange}
                           placeholder="New York"
-                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${errors.city ? 'border-[#CD2C2C]' : 'border-[#CFCFCF]'
-                            }`}
+                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${
+                            errors.city
+                              ? 'border-[#CD2C2C]'
+                              : 'border-[#CFCFCF]'
+                          }`}
                         />
                         {errors.city && (
                           <p className="text-[#CD2C2C] text-[12px] font-medium mt-1">
@@ -320,8 +349,11 @@ const CheckoutPage = () => {
                           value={formData.country}
                           onChange={handleInputChange}
                           placeholder="United States"
-                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${errors.country ? 'border-[#CD2C2C]' : 'border-[#CFCFCF]'
-                            }`}
+                          className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${
+                            errors.country
+                              ? 'border-[#CD2C2C]'
+                              : 'border-[#CFCFCF]'
+                          }`}
                         />
                         {errors.country && (
                           <p className="text-[#CD2C2C] text-[12px] font-medium mt-1">
@@ -367,7 +399,9 @@ const CheckoutPage = () => {
                             onChange={handleInputChange}
                             className="w-5 h-5 accent-[#D87D4A]"
                           />
-                          <span className="text-[14px] font-bold">Cash on Delivery</span>
+                          <span className="text-[14px] font-bold">
+                            Cash on Delivery
+                          </span>
                         </label>
                       </div>
                     </div>
@@ -384,8 +418,11 @@ const CheckoutPage = () => {
                             value={formData.eMoneyNumber}
                             onChange={handleInputChange}
                             placeholder="238521993"
-                            className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${errors.eMoneyNumber ? 'border-[#CD2C2C]' : 'border-[#CFCFCF]'
-                              }`}
+                            className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${
+                              errors.eMoneyNumber
+                                ? 'border-[#CD2C2C]'
+                                : 'border-[#CFCFCF]'
+                            }`}
                           />
                           {errors.eMoneyNumber && (
                             <p className="text-[#CD2C2C] text-[12px] font-medium mt-1">
@@ -404,8 +441,11 @@ const CheckoutPage = () => {
                             value={formData.eMoneyPin}
                             onChange={handleInputChange}
                             placeholder="6891"
-                            className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${errors.eMoneyPin ? 'border-[#CD2C2C]' : 'border-[#CFCFCF]'
-                              }`}
+                            className={`w-full px-6 py-4 border rounded-lg text-[14px] font-bold focus:outline-none focus:border-[#D87D4A] ${
+                              errors.eMoneyPin
+                                ? 'border-[#CD2C2C]'
+                                : 'border-[#CFCFCF]'
+                            }`}
                           />
                           {errors.eMoneyPin && (
                             <p className="text-[#CD2C2C] text-[12px] font-medium mt-1">
@@ -419,11 +459,18 @@ const CheckoutPage = () => {
                     {formData.paymentMethod === 'cash' && (
                       <div className="flex items-start gap-8 mt-8">
                         <div className="w-12 h-12 shrink-0">
-                          <Image src={"/assets/checkout/icon-cash-on-delivery.svg"} alt="cash" width={48} height={48} className="w-full h-full"  />
+                          <Image
+                            src={'/assets/checkout/icon-cash-on-delivery.svg'}
+                            alt="cash"
+                            width={48}
+                            height={48}
+                            className="w-full h-full"
+                          />
                         </div>
                         <p className="text-[15px] text-black/50 leading-[25px]">
-                          The 'Cash on Delivery' option enables you to pay in cash when our delivery
-                          courier arrives at your residence. Just make sure your address is correct so
+                          The &apos;Cash on Delivery&apos; option enables you to
+                          pay in cash when our delivery courier arrives at your
+                          residence. Just make sure your address is correct so
                           that your order will not be cancelled.
                         </p>
                       </div>
@@ -444,7 +491,7 @@ const CheckoutPage = () => {
                   {items.map((item) => (
                     <div key={item.id} className="flex items-center gap-4">
                       <div className="w-16 h-16 bg-[#F1F1F1] rounded-lg overflow-hidden shrink-0">
-                        <img
+                        <Image
                           src={item.image}
                           alt={item.name}
                           className="w-full h-full object-cover"
@@ -452,7 +499,10 @@ const CheckoutPage = () => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="text-[15px] font-bold truncate">
-                          {item.name.replace(' Headphones', '').replace(' Speaker', '').replace(' Earphones', '')}
+                          {item.name
+                            .replace(' Headphones', '')
+                            .replace(' Speaker', '')
+                            .replace(' Earphones', '')}
                         </h3>
                         <p className="text-[14px] text-black/50 font-bold">
                           $ {item.price.toLocaleString()}
@@ -468,24 +518,34 @@ const CheckoutPage = () => {
                 {/* Totals */}
                 <div className="space-y-2 mb-8">
                   <div className="flex justify-between">
-                    <span className="text-[15px] text-black/50 uppercase">Total</span>
+                    <span className="text-[15px] text-black/50 uppercase">
+                      Total
+                    </span>
                     <span className="text-[18px] font-bold">
                       $ {totalPrice.toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[15px] text-black/50 uppercase">Shipping</span>
+                    <span className="text-[15px] text-black/50 uppercase">
+                      Shipping
+                    </span>
                     <span className="text-[18px] font-bold">$ {shipping}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[15px] text-black/50 uppercase">VAT (Included)</span>
-                    <span className="text-[18px] font-bold">$ {vat.toLocaleString()}</span>
+                    <span className="text-[15px] text-black/50 uppercase">
+                      VAT (Included)
+                    </span>
+                    <span className="text-[18px] font-bold">
+                      $ {vat.toLocaleString()}
+                    </span>
                   </div>
                 </div>
 
                 {/* Grand Total */}
                 <div className="flex justify-between mb-8">
-                  <span className="text-[15px] text-black/50 uppercase">Grand Total</span>
+                  <span className="text-[15px] text-black/50 uppercase">
+                    Grand Total
+                  </span>
                   <span className="text-[18px] font-bold text-[#D87D4A]">
                     $ {grandTotal.toLocaleString()}
                   </span>
