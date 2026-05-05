@@ -494,6 +494,8 @@ const CheckoutPage = () => {
                         <Image
                           src={item.image}
                           alt={item.name}
+                          width={64}
+                          height={64}
                           className="w-full h-full object-cover"
                         />
                       </div>
